@@ -26,7 +26,21 @@
 				<h2>Tagging</h2>
 
 				<!-- ############### Aufgabe1a Form1 Start -->
-				<form id="tag-form" action="/tagging" method="post"></form>
+				<form id="tag-form" action="/tagging" method="post">
+				<fieldset>
+					<legend>Enter new GeoTag</legend>
+					<label for="latitude">latitude:</label>
+					<input type="text" name="latitude" placeholder="52.523430" id=latitude required><br>
+					<label for="longitude">longitude:</label>
+					<input type="text" name= "longitude" placeholder="13.411440" id=longitude required><br>
+					<label for="name">name:</label>
+					<input type="text" name="name" placeholder="reichtag" id=name maxlength="10" required><br>
+					<label for="hashtag">hashtag:</label>
+					<input type="text" name="hashtag" placeholder="#politik" id=hashtag pattern="#.*" maxlength="11"><br>
+					<label for="submit-button"></label>
+					<input type="submit" name="submit-button" value="submit">
+				</fieldset>
+				</form>
 				<!-- ############### Aufgabe1a Form1 Ende -->
 
 			</section>
@@ -35,7 +49,17 @@
 				<h2>Discovery</h2>
 
 				<!-- ############### Aufgabe1a Form2 Start -->
-				<form id="filter-form" action="/discovery" method="post"></form>
+				<form id="filter-form" action="/discovery" method="post">
+				<fieldset>
+					<legend>Filter by Searchterm</legend>
+					<label for="searchbox"></label>
+					<input type="search" name="searchbox" placeholder="enter term here" id=searchbox>
+					<label for=search-button></label>
+					<input type="submit" name="search-button" value="search">
+					<label for="remove-button"></label>
+					<input type="submit" name="remove-button" value="remove">
+				</fieldset>
+				</form>
 				<!-- ############### Aufgabe1a Form2 Ende -->
 
 				<div class="taglist">
