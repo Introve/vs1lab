@@ -29,25 +29,77 @@ app.set('view engine', 'ejs');
  * Teste das Ergebnis im Browser unter 'http://localhost:3000/'.
  */
 
-// TODO: CODE ERGÄNZEN
+app.use(express.static('public'));
 
 /**
  * Konstruktor für GeoTag Objekte.
  * GeoTag Objekte sollen min. alle Felder des 'tag-form' Formulars aufnehmen.
  */
 
-// TODO: CODE ERGÄNZEN
+function GeoTag(name, latitude, longitude, hashtag) {
+    this.name = name;
+    this.latitude = latitude;
+    this.longitude = longitude;
+    this.hashtag = hashtag;
+}
 
 /**
  * Modul für 'In-Memory'-Speicherung von GeoTags mit folgenden Komponenten:
- * - Array als Speicher für Geo Tags.
- * - Funktion zur Suche von Geo Tags in einem Radius um eine Koordinate.
- * - Funktion zur Suche von Geo Tags nach Suchbegriff.
- * - Funktion zum hinzufügen eines Geo Tags.
- * - Funktion zum Löschen eines Geo Tags.
+ * - Array als Speicher für Geo Tags. ->CHECK
+ * - Funktion zur Suche von Geo Tags in einem Radius um eine Koordinate. -> CHECK
+ * - Funktion zur Suche von Geo Tags nach Suchbegriff. -> CHECK
+ * - Funktion zum hinzufügen eines Geo Tags. -> HALF
+ * - Funktion zum Löschen eines Geo Tags. -> CHECK
  */
 
-// TODO: CODE ERGÄNZEN
+var taglist = [];
+
+// returns an array with Geotags within a specific radius
+function radiusSearch(latitude, longitude, radius) {
+
+    // filter is true for tags within radius, creates new array with only those tags
+    return taglist.filter(geoTag => (distance(geoTag.latitude, geoTag.longitude, latitude, longitude) <= radius) ? true : false)
+
+    // calculate distance between two geocoords, see geodatasource.com
+    function distance(lat1, lon1, lat2, lon2) {
+        if ((lat1 == lat2) && (lon1 == lon2)) {
+            return 0;
+        } else {
+            var radlat1 = Math.PI * lat1 / 180;
+            var radlat2 = Math.PI * lat2 / 180;
+            var theta = lon1 - lon2;
+            var radtheta = Math.PI * theta / 180;
+            var dist = Math.sin(radlat1) * Math.sin(radlat2) +
+                Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+            if (dist > 1) {
+                dist = 1;
+            }
+            dist = Math.acos(dist);
+            dist = dist * 180 / Math.PI;
+            dist = dist * 60 * 1.1515;
+            // degree to kilometre
+            dist = dist * 1.609344;
+            return dist;
+        }
+    }
+
+}
+
+// returns array only containing searched geoTags
+function nameSearch(name) {
+    return taglist.filter(geoTag => (geoTag.name.includes(name) || geoTag.hashtag.includes(name)) ? true : false)
+}
+// adds a geoTag to array
+// TODO: link to html form
+function addTag(name, latitude, longitude, hashtag) {
+    taglist.push(new GeoTag(name, latitude, longitude, hashtag));
+}
+
+// overrides old taglist excluding searched geoTags
+function removetag(name) {
+    taglist = taglist.filter(geoTag => (geoTag.name.includes(name) || geoTag.hashtag.includes(name)) ? false : true)
+}
+
 
 /**
  * Route mit Pfad '/' für HTTP 'GET' Requests.
@@ -58,7 +110,7 @@ app.set('view engine', 'ejs');
  * Als Response wird das ejs-Template ohne Geo Tag Objekte gerendert.
  */
 
-app.get('/', function(req, res) {
+app.get('/', function (req, res) {
     res.render('gta', {
         taglist: []
     });
