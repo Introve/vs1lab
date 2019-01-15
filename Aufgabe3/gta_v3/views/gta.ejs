@@ -1,4 +1,3 @@
-<!-- TODO: HTML AUS AUFGABE2 HIERHER KOPIEREN UND DIE BEISPIEL-EINTRÄGE DER DISCOVERY-LISTE MIT DEN FOLGENDEN ZEILEN ERSETZEN -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,10 +28,10 @@
 				<fieldset>
 					<legend>Enter new GeoTag</legend>
 					<label for="latitude">latitude:</label>
-					<input type="text" name="latitude" placeholder="52.523430" id=latitude required><br>
+					<input type="text" name="latitude" placeholder="52.523430" id=latitude value="<%= latitude %>" required><br>
 
 					<label for="longitude">longitude:</label>
-					<input type="text" name="longitude" placeholder="13.411440" id=longitude required><br>
+					<input type="text" name="longitude" placeholder="13.411440" id=longitude value="<%= longitude %>" required><br>
 
 					<label for="name">name:</label>
 					<input type="text" name="name" placeholder="reichtag" id=name maxlength="10" required><br>
@@ -60,8 +59,8 @@
 
 					<label for=search-button></label>
 					<input class=button type="submit" name="discoverybutton" id=search-button value="search">
-					<input type="hidden" name="search-longitude" id="search-longitude" value="longitude">
-					<input type="hidden" name="search-latitude" id="search-latitude" value="latitude">
+					<input type="hidden" name="search-longitude" id="search-longitude" value="<%= longitude %>">
+					<input type="hidden" name="search-latitude" id="search-latitude" value="<%= latitude %>">
 
 					<label for="remove-button"></label>
 					<input class=button type="submit" name="discoverybutton" id=remove-button value="remove">

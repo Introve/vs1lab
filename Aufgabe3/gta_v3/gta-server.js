@@ -87,17 +87,23 @@ function radiusSearch(latitude, longitude, radius) {
 
 // returns array only containing searched geoTags
 function nameSearch(name) {
-    return taglist.filter(geoTag => (geoTag.name.includes(name) || geoTag.hashtag.includes(name)) ? true : false)
+    return taglist.filter(geoTag => (geoTag.name.toLowerCase().includes(name.toLowerCase()) ||
+        geoTag.hashtag.toLowerCase().includes(name.toLowerCase())) ? true : false)
 }
 
 // adds a geoTag to array
 function addTag(name, latitude, longitude, hashtag) {
     taglist.push(new GeoTag(name, latitude, longitude, hashtag));
+    console.log('create new GeoTag');
 }
 
 // overrides old taglist excluding searched geoTags
 function removeTag(name) {
-    taglist = taglist.filter(geoTag => (geoTag.name.includes(name) || geoTag.hashtag.includes(name)) ? false : true)
+    taglist = taglist.filter(geoTag => (geoTag.name.localeCompare(name, undefined, {
+        sensitivity: 'case'
+    }) === 0 || geoTag.hashtag.localeCompare(name, undefined, {
+        sensitivity: 'case'
+    }) === 0) ? false : true)
 }
 
 
@@ -111,8 +117,11 @@ function removeTag(name) {
  */
 
 app.get('/', function (req, res) {
+
     res.render('gta', {
-        taglist: []
+        taglist: [],
+        longitude: req.body.longitude,
+        latitude: req.body.latitude
     });
 });
 
@@ -134,7 +143,9 @@ app.post('/tagging', function (req, res) {
     addTag(req.body.name, req.body.latitude, req.body.longitude, req.body.hashtag);
 
     res.render('gta', {
-        taglist: taglist
+        taglist: taglist,
+        longitude: '',
+        latitude: ''
     });
 });
 
@@ -150,8 +161,6 @@ app.post('/tagging', function (req, res) {
  * Falls 'term' vorhanden ist, wird nach Suchwort gefiltert.
  */
 
-// TODO: search is caseSensitive, delete searches for substrings
-
 app.post('/discovery', function (req, res) {
     var newList;
 
@@ -163,16 +172,22 @@ app.post('/discovery', function (req, res) {
         newList = nameSearch(req.body.searchbox);
 
         res.render('gta', {
-            taglist: newList
+            taglist: newList,
+            longitude: '',
+            latitude: ''
         });
     } else {
         res.render('gta', {
-            taglist: taglist
+            taglist: taglist,
+            longitude: '',
+            latitude: ''
         });
     }
 
     res.render('gta', {
-        taglist: taglist
+        taglist: taglist,
+        longitude: '',
+        latitude: ''
     });
 });
 
