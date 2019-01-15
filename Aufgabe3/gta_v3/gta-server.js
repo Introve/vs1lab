@@ -9,7 +9,7 @@
  */
 
 var http = require('http');
-//var path = require('path');
+var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var express = require('express');
@@ -48,7 +48,7 @@ function GeoTag(name, latitude, longitude, hashtag) {
  * - Array als Speicher für Geo Tags. ->CHECK
  * - Funktion zur Suche von Geo Tags in einem Radius um eine Koordinate. -> CHECK
  * - Funktion zur Suche von Geo Tags nach Suchbegriff. -> CHECK
- * - Funktion zum hinzufügen eines Geo Tags. -> HALF
+ * - Funktion zum hinzufügen eines Geo Tags. -> CHECK
  * - Funktion zum Löschen eines Geo Tags. -> CHECK
  */
 
@@ -89,14 +89,14 @@ function radiusSearch(latitude, longitude, radius) {
 function nameSearch(name) {
     return taglist.filter(geoTag => (geoTag.name.includes(name) || geoTag.hashtag.includes(name)) ? true : false)
 }
+
 // adds a geoTag to array
-// TODO: link to html form
 function addTag(name, latitude, longitude, hashtag) {
     taglist.push(new GeoTag(name, latitude, longitude, hashtag));
 }
 
 // overrides old taglist excluding searched geoTags
-function removetag(name) {
+function removeTag(name) {
     taglist = taglist.filter(geoTag => (geoTag.name.includes(name) || geoTag.hashtag.includes(name)) ? false : true)
 }
 
@@ -129,7 +129,14 @@ app.get('/', function (req, res) {
  * Die Objekte liegen in einem Standard Radius um die Koordinate (lat, lon).
  */
 
-// TODO: CODE ERGÄNZEN START
+app.post('/tagging', function (req, res) {
+
+    addTag(req.body.name, req.body.latitude, req.body.longitude, req.body.hashtag);
+
+    res.render('gta', {
+        taglist: taglist
+    });
+});
 
 /**
  * Route mit Pfad '/discovery' für HTTP 'POST' Requests.
@@ -143,7 +150,31 @@ app.get('/', function (req, res) {
  * Falls 'term' vorhanden ist, wird nach Suchwort gefiltert.
  */
 
-// TODO: CODE ERGÄNZEN
+// TODO: search is caseSensitive, delete searches for substrings
+
+app.post('/discovery', function (req, res) {
+    var newList;
+
+    if (req.body.discoverybutton === 'remove') {
+        removeTag(req.body.searchbox);
+    }
+
+    if (req.body.discoverybutton === 'search') {
+        newList = nameSearch(req.body.searchbox);
+
+        res.render('gta', {
+            taglist: newList
+        });
+    } else {
+        res.render('gta', {
+            taglist: taglist
+        });
+    }
+
+    res.render('gta', {
+        taglist: taglist
+    });
+});
 
 /**
  * Setze Port und speichere in Express.

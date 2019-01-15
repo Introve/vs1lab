@@ -59,12 +59,12 @@
 					<input type="search" name="searchbox" placeholder="enter term here" id=searchbox>
 
 					<label for=search-button></label>
-					<input class=button type="submit" name="search-button" id=search-button value="search">
+					<input class=button type="submit" name="discoverybutton" id=search-button value="search">
 					<input type="hidden" name="search-longitude" id="search-longitude" value="longitude">
 					<input type="hidden" name="search-latitude" id="search-latitude" value="latitude">
 
 					<label for="remove-button"></label>
-					<input class=button type="submit" name="remove-button" id=remove-button value="remove">
+					<input class=button type="submit" name="discoverybutton" id=remove-button value="remove">
 				</fieldset>
 			</form>
 			<!-- ############### Aufgabe1a Form2 Ende -->
@@ -104,12 +104,3 @@
 </body>
 
 </html>
-
-<% if (taglist !== undefined) taglist.forEach(function(gtag) { %>
-<li>
-	<%= gtag.name %> (
-	<%= gtag.latitude %>,
-	<%= gtag.longitude %>)
-	<%= gtag.hashtag %>
-</li>
-<% }); %>
