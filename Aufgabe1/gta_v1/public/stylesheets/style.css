@@ -1,3 +1,5 @@
+/* TODO: media queries ? */
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -5,4 +7,67 @@ body {
 
 a {
   color: #00B7FF;
+}
+
+header {
+  background-color: grey;
+  color: white;
+  padding: 15px;
+}
+
+main {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+footer {
+  background-color: grey;
+  color: white;
+  padding: 15px;
+}
+
+.tags {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin: 2%;
+}
+
+.tagging {
+  display: flex;
+  flex-flow: column;
+  flex-grow: 1;
+  margin-right: 3%;
+}
+
+.discovery {
+  display: flex;
+  flex-flow: column;
+  flex-grow: 1;
+}
+
+.taglist table td {
+  color: white;
+  background-color: #00B7FF;
+  padding: 10px;
+  margin: 10px;
+  border-bottom: 5px white solid;
+}
+
+fieldset {
+  display: flex;
+}
+
+fieldset input {
+  padding: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+fieldset label {
+  margin: 5px;
+}
+
+.discovery fieldset {
+  display: block;
 }
