@@ -118,6 +118,8 @@ function removeTag(name) {
 
 app.get('/', function (req, res) {
 
+    //longitude ist wohl undefined ?
+
     res.render('gta', {
         taglist: [],
         longitude: req.body.longitude,
