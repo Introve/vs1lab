@@ -70,7 +70,7 @@ entsprechende Folien). Verwenden Sie kein JQuery.
   *HTTP POST* in *JSON Format* an den Server senden.
   - Tipp 1: Sie können hier den serverseitigen *GeoTag Konstruktor* aus Aufgabe 3
     im Client Skript wiederverwenden.
-  - Tipp 2: spezifizieren sie einen geeignezen *MIME-Type* für JSON im
+  - Tipp 2: spezifizieren sie einen geeigneten *MIME-Type* für JSON im
     HTTP-Header `Content-Type`, damit der Server den Inhalt erkennt.
 - Für das **Filterformular** soll der Aufruf auch *asynchron* ablaufen aber per *HTTP
   GET* mit *Query Parametern* erfolgen.
@@ -131,7 +131,7 @@ verfügbar. Beliebte Beispiele sind:
 - **insomnia** [https://insomnia.rest](https://insomnia.rest)
 - **Postman** [https://www.getpostman.com](https://www.getpostman.com)
 
-Demonstrieren Sie alle ROuten Ihrer REST API mit einem REST Client Ihrer Wahl.
+Demonstrieren Sie alle Routen Ihrer REST API mit einem REST Client Ihrer Wahl.
 
 #### Tipps zur Verarbeitung von JSON im Express Server
 
