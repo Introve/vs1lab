@@ -310,3 +310,5 @@ $RECYCLE.BIN/
 
 
 # End of https://www.gitignore.io/api/node,web,linux,macos,windows,webstorm+all,eclipse
+
+Aufgabe4/gta_v4/package-lock\.json
