@@ -118,12 +118,10 @@ function removeTag(name) {
 
 app.get('/', function (req, res) {
 
-    //longitude ist wohl undefined ?
-
     res.render('gta', {
         taglist: [],
-        longitude: req.body.longitude,
-        latitude: req.body.latitude
+        longitude: '',
+        latitude: ''
     });
 });
 
@@ -146,8 +144,8 @@ app.post('/tagging', function (req, res) {
 
     res.render('gta', {
         taglist: taglist,
-        longitude: '',
-        latitude: ''
+        longitude: req.body.longitude,
+        latitude: req.body.latitude
     });
 });
 
@@ -175,21 +173,22 @@ app.post('/discovery', function (req, res) {
 
         res.render('gta', {
             taglist: newList,
-            longitude: '',
-            latitude: ''
+            longitude: req.body.longitude,
+            latitude: req.body.latitude
+
         });
     } else {
         res.render('gta', {
             taglist: taglist,
-            longitude: '',
-            latitude: ''
+            longitude: req.body.longitude,
+            latitude: req.body.latitude
         });
     }
 
     res.render('gta', {
         taglist: taglist,
-        longitude: '',
-        latitude: ''
+        longitude: req.body.longitude,
+        latitude: req.body.latitude
     });
 });
 
