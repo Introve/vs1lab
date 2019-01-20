@@ -3,12 +3,14 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./gta-server.js"
+    "start": "node ./gta-server.js",
+    "watch": "npx nodemon ./gta-server.js"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
-    "express": "^4.16.3",
-    "morgan": "^1.9.1",
-    "ejs": "^2.5.5"
+    "ejs": "~2.5.5",
+    "express": "^4.16.4",
+    "express-validator": "^5.3.1",
+    "morgan": "^1.9.1"
   }
 }
