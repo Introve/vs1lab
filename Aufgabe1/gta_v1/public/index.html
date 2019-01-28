@@ -28,10 +28,10 @@
 				<fieldset>
 					<legend>Enter new GeoTag</legend>
 					<label for="latitude">latitude:</label>
-					<input type="text" name="latitude" placeholder="52.523430" id=latitude required><br>
+					<input type="text" name="latitude" placeholder="52.523430" id=latitude value="" required><br>
 
 					<label for="longitude">longitude:</label>
-					<input type="text" name="longitude" placeholder="13.411440" id=longitude required><br>
+					<input type="text" name="longitude" placeholder="13.411440" id=longitude value="" required><br>
 
 					<label for="name">name:</label>
 					<input type="text" name="name" placeholder="reichtag" id=name maxlength="10" required><br>
@@ -58,31 +58,32 @@
 					<input type="search" name="searchbox" placeholder="enter term here" id=searchbox>
 
 					<label for=search-button></label>
-					<input class=button type="submit" name="search-button" id=search-button value="search">
-					<input type="hidden" value="longitude, latitude">
+					<input class=button type="submit" name="discoverybutton" id=search-button value="search">
+					<input type="hidden" name="search-longitude" id="search-longitude" value="<%= longitude %>">
+					<input type="hidden" name="search-latitude" id="search-latitude" value="<%= latitude %>">
 
 					<label for="remove-button"></label>
-					<input class=button type="submit" name="remove-button" id=remove-button value="remove">
+					<input class=button type="submit" name="discoverybutton" id=remove-button value="remove">
 				</fieldset>
 			</form>
 			<!-- ############### Aufgabe1a Form2 Ende -->
 			<div class="tags">
 				<div class="taglist">
-					<table id="results">
-						<tr>
-							<td>Castle (49.01379, 8.404435) #sight</td>
-						</tr>
-						<tr>
-							<td>IWI (49.01379, 8.390071) #edu</td>
-						</tr>
-					</table>
+					<ul id="results">
+						<li>
+							Castle (49.01379, 8.404435) #sight
+						</li>
+						<li>
+							IWI (49.01379, 8.390071) #edu
+						</li>
+					</ul>
 				</div>
 
 				<div class="tagmap">
 					<img id="result-img" src="./images/mapview.jpg" alt="a map with locations" />
 					<div class="caption">Result map</div>
 				</div>
-				</div>
+			</div>
 		</section>
 
 	</main>
@@ -90,6 +91,12 @@
 	<footer>
 		<span>2017 by LKIT</span>
 	</footer>
+
+	<!-- Load JavaScripts
+		================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="./javascripts/geotagging.js"></script>
 
 </body>
 

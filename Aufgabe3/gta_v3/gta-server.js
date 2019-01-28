@@ -119,7 +119,7 @@ function removeTag(name) {
 app.get('/', function (req, res) {
 
     res.render('gta', {
-        taglist: [],
+        taglist: taglist,
         longitude: '',
         latitude: ''
     });
